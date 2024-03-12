@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image:url("C:/Users/ananda/Downloads/greybackground.jpg");
+        }
+
+        nav {
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 25%;
+            background-color: #333;
+            padding-top: 20px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        nav ul li {
+            margin-bottom: 10px;
+        }
+
+        nav ul li a {
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav ul li a:hover {
+            background-color: #111;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-left: 30%; /* Adjusted to place the container towards the left */
+            margin-top: 50px; /* Adjusted for better spacing */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container:hover {
+            box-shadow: 0 0 30px #267394;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            width: 70%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 2px solid #46709c;
+        }
+
+        input[type="text"]:hover {
+            border: 2px solid dodgerblue;
+        }
+
+        button {
+            padding: 8px 20px;
+            background-color: #1b497a;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007e54;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            padding: 8px;
+            background-color: #928a8a33;
+            border-radius: 4px;
+            margin-bottom: 5px;
+        }
+
+        .completed {
+            background-color: #26945f;
+        }
+
+        .remove-button {
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+            margin-left: 5px;
+        }
+
+        .complete-button {
+            background-color: #007e54;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="login.html">LOGIN</a></li>
+            <li><a href="signin.html">REGISTRATION</a></li>
+            <li><a href="navtolist.html">TO DO LIST</a></li>
+            <li><a href="#">REMINDER</a></li>
+            <li><a></a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>TO-DO-LIST</h1>
+        <input type="text" id="taskInput" placeholder="Add new task">
+        <button onclick="addTask()">Add Task</button>
+        <ul id="taskList"></ul>
+    </div>
+    <script>
+        // Function to add a new task
+        function addTask() {
+            var taskInput = document.getElementById("taskInput");
+            var taskList = document.getElementById("taskList");
+
+            if (taskInput.value.trim() !== "") {
+                var taskItem = document.createElement("li");
+                taskItem.textContent = taskInput.value;
+
+                // Create remove button
+                var removeButton = document.createElement("button");
+                removeButton.textContent = "Remove";
+                removeButton.className = "remove-button";
+                removeButton.onclick = function() {
+                    taskList.removeChild(taskItem);
+                };
+
+                // Create complete button
+                var completeButton = document.createElement("button");
+                completeButton.textContent = "Complete";
+                completeButton.className = "complete-button";
+                completeButton.onclick = function() {
+                    taskItem.classList.toggle("completed");
+                };
+
+                // Append buttons to task item
+                taskItem.appendChild(removeButton);
+                taskItem.appendChild(completeButton);
+
+                // Add task item to task list
+                taskList.appendChild(taskItem);
+
+                taskInput.value = "";
+            } else {
+                alert("Please enter a task.");
+            }
+        }
+    </script>
+</body>
+</html>
